@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import './App.css';
 
 const App = () => {
-  // State for Dark Mode, Tabs, and Stats Filter
+  //Dark Mode, Tabs, and Stats Filter
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeTab, setActiveTab] = useState('test');
   const [statFilter, setStatFilter] = useState('all');
 
-  // Mock Data
   const playerData = {
     test: [
       { name: "Rohit Sharma", matches: 67, runs: "2,822", avg: 40.57, hundreds: 7, fifties: 18 },
@@ -31,7 +30,7 @@ const App = () => {
   return (
     <div className={`app-wrapper ${isDarkMode ? 'dark-mode' : ''}`}>
       <header>
-        <h1>🏏 Cricket Info Hub</h1>
+        <h1>Boundary Buzz</h1>
         <p>Player Stats, Match Highlights & IPL Coverage</p>
       </header>
 
@@ -39,7 +38,7 @@ const App = () => {
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <a href="#players">Players</a>
-            <a href="#matches">Matches</a>
+            <a href="#matches">Matches</a>    
             <a href="#stats">Stats Hub</a>
           </div>
           <button onClick={() => setIsDarkMode(!isDarkMode)} className="theme-toggle">
