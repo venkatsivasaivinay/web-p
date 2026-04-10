@@ -1,0 +1,221 @@
+/* --- Variables & Themes --- */
+:root {
+  --primary: #8e44ad;   /* purple */
+  --primary-light: #a569bd;
+  --primary-dark: #6c3483;
+  --accent: #228b22;    /* green for matches accent */
+  --text: #333;
+  --bg: #f0f8ff;
+  --card-bg: #fff;
+  --nav-bg: #222;
+  --border: #ddd;
+  --shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+/* Dark Mode Overrides */
+.dark-mode {
+  --text: #e0e0e0;
+  --bg: #121212;
+  --card-bg: #1f1f1f;
+  --border: #444;
+}
+
+/* --- Global Reset --- */
+* {
+  box-sizing: border-box;
+}
+
+.app-wrapper {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background-color 0.3s, color 0.3s;
+  min-height: 100vh;
+}
+
+/* --- Header & Nav --- */
+header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light), var(--accent));
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+header p {
+  margin: 8px 0 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+nav {
+  background: var(--nav-bg);
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+nav a {
+  color: #fff;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+nav a:hover {
+  background: rgba(142,68,173,0.3);
+  transform: translateY(-1px);
+}
+
+.theme-toggle {
+  background: #444;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.theme-toggle:hover {
+  background: #555;
+}
+
+/* --- Layout Container --- */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+/* --- Sections & Cards --- */
+.section {
+  background: var(--card-bg);
+  margin: 20px 0;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.16);
+}
+
+.section h2 {
+  margin-top: 0;
+  font-size: 1.6rem;
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 8px;
+}
+
+.section h3 {
+  margin: 16px 0 10px;
+  font-size: 1.2rem;
+  color: inherit;
+  font-weight: 550;
+}
+
+/* --- Interaction Elements --- */
+.section-pills {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.pill-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 20px;
+  background: #e0e0e0;
+  color: #333;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.pill-btn.active {
+  background: var(--primary);
+  color: white;
+}
+
+/* --- Table Styles --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.95rem;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background-color: var(--primary);
+  color: white;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(142,68,173,0.04);
+}
+
+/* --- Stats Hub --- */
+.stats-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 14px;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+}
+
+.stats-card {
+  min-width: 220px;
+  padding: 14px 18px;
+  background: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 1px solid var(--border);
+}
+
+.match {
+  background: rgba(142,68,173,0.1);
+  padding: 14px 16px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border-left: 4px solid var(--primary);
+  font-size: 0.95rem;
+}
+
+/* --- Footer --- */
+footer {
+  text-align: center;
+  padding: 24px 20px;
+  background: var(--nav-bg);
+  color: #aaa;
+  margin-top: 40px;
+}
