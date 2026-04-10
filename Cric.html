@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🏏 Cricket Info Hub</title>
+    <style>
+        :root {
+            --primary: #8e44ad;   /* purple */
+            --primary-light: #a569bd;
+            --primary-dark: #6c3483;
+            --accent: #228b22;    /* green for matches accent */
+            --text: #333;
+            --bg: #f0f8ff;
+            --card-bg: #fff;
+            --nav-bg: #222;
+            --border: #ddd;
+            --shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+        .dark-mode {
+            --text: #e0e0e0;
+            --bg: #121212;
+            --card-bg: #1f1f1f;
+            --border: #444;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light), var(--accent));
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        header p {
+            margin: 8px 0 0;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        nav {
+            background: var(--nav-bg);
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        nav a:hover {
+            background: rgba(142,68,173,0.3);
+            transform: translateY(-1px);
+        }
+        .theme-toggle {
+            background: #444;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .theme-toggle:hover {
+            background: #555;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .section {
+            background: var(--card-bg);
+            margin: 20px 0;
+            padding: 24px;
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.16);
+        }
+        .section h2 {
+            margin-top: 0;
+            font-size: 1.6rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 8px;
+        }
+        .section h3 {
+            margin: 16px 0 10px;
+            font-size: 1.2rem;
+            color: #444;
+            font-weight: 550;
+        }
+        .section-pills {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .pill-btn {
+            padding: 6px 14px;
+            border: none;
+            border-radius: 20px;
+            background: #e0e0e0;
+            color: #333;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .pill-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 0.95rem;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: rgba(142,68,173,0.04);
+        }
+        .stats-card {
+            min-width: 220px;
+            padding: 14px 18px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+        }
+        .stats-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 14px;
+            padding: 10px 0;
+            scroll-behavior: smooth;
+        }
+        .match {
+            background: #e8f4f8;
+            padding: 14px 16px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+            font-size: 0.95rem;
+        }
+        footer {
+            text-align: center;
+            padding: 24px 20px;
+            background: var(--nav-bg);
+            color: #aaa;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🏏 Cricket Info Hub</h1>
+        <p>Player Stats, Match Highlights & IPL Coverage</p>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div>
+                <a href="#players">Players</a>
+                <a href="#matches">Matches</a>
+                <a href="#stats">Stats Hub</a>
+            </div>
+            <button id="theme-toggle" class="theme-toggle"> Dark Mode</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="players" class="section">
+            <h2>Top Players Comparison: Rohit Sharma vs Virat Kohli</h2>
+
+            <div class="section-pills">
+                <button class="pill-btn active" data-pill="test">Test Stats</button>
+                <button class="pill-btn" data-pill="odi">ODI Stats</button>
+                <button class="pill-btn" data-pill="t20i">T20I Stats</button>
+            </div>
+
+            <div class="tab-content active" id="pill-test">
+                <table>
+                    <thead>
+                        <tr><th>Player</th><th>Matches</th><th>Runs</th><th>Avg</th><th>100s</th><th>50s</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Rohit Sharma</td><td>67</td><td>2,822</td><td>40.57</td><td>7</td><td>18</td></tr>
+                        <tr><td>Virat Kohli</td><td>123</td><td>8,848</td><td>46.85</td><td>29</td><td>30</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-content" id="pill-odi">
+                <table>
+                    <thead>
+                        <tr><th>Player</th><th>Matches</th><th>Runs</th><th>Avg</th><th>100s</th><th>HS</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Rohit Sharma</td><td>273</td><td>11,168</td><td>48.76</td><td>32</td><td>264</td></tr>
+                        <tr><td>Virat Kohli</td><td>302</td><td>14,181</td><td>57.88</td><td>51</td><td>183</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-content" id="pill-t20i">
+                <table>
+                    <thead>
+                        <tr><th>Player</th><th>Matches</th><th>Runs</th><th>Avg</th><th>100s</th><th>50s</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Rohit Sharma</td><td>159</td><td>4,231</td><td>32.05</td><td>5</td><td>27</td></tr>
+                        <tr><td>Virat Kohli</td><td>125</td><td>4,188</td><td>48.69</td><td>1</td><td>32</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="matches" class="section">
+            <h2>Recent IPL 2025 Matches</h2>
+            <div class="match-list">
+                <div class="match">
+                    <h3>SRH (278/3) beat KKR (168) by 110 runs</h3>
+                    <p>Match 68 – Rajiv Gandhi International Stadium.</p>
+                </div>
+                <div class="match">
+                    <h3>MI (177/1) beat CSK (176/5) by 9 wickets</h3>
+                    <p>Match 38 – MA Chidambaram Stadium.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="stats" class="section">
+            <h2>📊 Stats Hub</h2>
+            <div class="section-pills">
+                <button class="pill-btn stats-filter active" data-filter="all">All</button>
+                <button class="pill-btn stats-filter" data-filter="rohit">Rohit</button>
+                <button class="pill-btn stats-filter" data-filter="kohli">Kohli</button>
+            </div>
+
+            <div class="stats-carousel">
+                <div class="stats-card" data-category="rohit">
+                    <h4>Rohit Strike Rate</h4>
+                    <p>140.89 in T20Is</p>
+                </div>
+                <div class="stats-card" data-category="kohli">
+                    <h4>Kohli Average</h4>
+                    <p>90.00+ in successful chases</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Cricket Info Hub &copy; 2026 | Built for IPL Fans</p>
+    </footer>
+
+    <script>
+        // 1. FORMAT TAB SWITCHING
+        const pillButtons = document.querySelectorAll('.pill-btn[data-pill]');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        pillButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const target = button.getAttribute('data-pill');
+                
+                // Toggle Button active state
+                pillButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Toggle Content active state
+                tabContents.forEach(tab => {
+                    tab.classList.remove('active');
+                    if(tab.id === `pill-${target}`) tab.classList.add('active');
+                });
+            });
+        });
+
+        // 2. DARK MODE TOGGLE
+        const themeBtn = document.getElementById('theme-toggle');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            themeBtn.innerText = document.body.classList.contains('dark-mode') ? "Light Mode" : "Dark Mode";
+        });
+
+        // 3. STATS HUB FILTERING
+        const filterBtns = document.querySelectorAll('.stats-filter');
+        const statCards = document.querySelectorAll('.stats-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.getAttribute('data-filter');
+                
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                statCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
