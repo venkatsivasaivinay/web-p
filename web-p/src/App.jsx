@@ -126,7 +126,7 @@ const App = () => {
       </div>
 
       <footer>
-        <p>Cricket Info Hub &copy; 2026 | Built for IPL Fans</p>
+        <p>Boundary Buzz &copy; 2026 | Built for IPL Fans</p>
       </footer>
     </div>
   );
